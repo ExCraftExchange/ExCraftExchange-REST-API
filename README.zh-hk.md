@@ -79,7 +79,24 @@ details = response.headers[grpc-message]
 }
 ```
 
-## 3 GetMarketTrades
+## 3 GetMarketStatusToday
+獲取24小時交易狀態<br>
+/apis/trading/v1/markets/{market}/status_today<br>
+請求參數：無<br>
+請求類型：get<br>
+返回結果：<br>
+```python
+{
+  last:string;
+  open:string;
+  close:string;
+  high:string;
+  low:string;
+  volume:string;
+}
+```
+
+## 4 GetMarketTrades
 獲取最近成交紀錄<br>
 /apis/trading/v1/markets/{market}/trades<br>
 請求參數：<br>
@@ -104,7 +121,7 @@ json_encode{
 ]
 ```
 
-## 4 GetDepth
+## 5 GetDepth
 獲取交易掛單<br>
 /apis/trading/v1/markets/{market}/depth<br>
 請求參數：<br>
@@ -135,7 +152,7 @@ json_encode{
 ```
 
 
-## 5 GetMarketCandles
+## 6 GetMarketCandles
 獲取交易k線圖<br>
 /apis/trading/v1/markets/{market}/candles<br>
 請求參數：<br>

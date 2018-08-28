@@ -35,7 +35,7 @@ details = response.headers[grpc-message]
 | 값	| 의미 |
 | :-----: | :-------: |
 | 60	| 1 의미  |
-| 300	| 5 의미  | 
+| 300	| 5 의미  |
 | 900	| 15 의미 |
 | 1800	| 30 의미 |
 | 3600	| 1 시간  |
@@ -95,7 +95,7 @@ details = response.headers[grpc-message]
 }
 ```
 
-## 3 GetMarketTrades
+## 4 GetMarketTrades
 최근 거래 기록 가져 오기 <br>
 /apis/trading/v1/markets/{market}/trades<br>
 요청 매개 변수 : <br>
@@ -120,7 +120,7 @@ json_encode{
 ]
 ```
 
-## 4 GetDepth
+## 5 GetDepth
 거래 보류 명령 받기 <br>
 /apis/trading/v1/markets/{market}/depth<br>
 요청 매개 변수 : <br>
@@ -151,7 +151,7 @@ json_encode{
 ```
 
 
-## 5 GetMarketCandles
+## 6 GetMarketCandles
 거래 k 라인 차트 가져 오기 <br>
 /apis/trading/v1/markets/{market}/candles<br>
 요청 매개 변수 : <br>

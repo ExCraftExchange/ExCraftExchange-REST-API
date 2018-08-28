@@ -34,12 +34,12 @@ details = response.headers[grpc-message]
 # K线时间间隔
 | 值	| 含义 |
 | :-----: | :-------: |
-| 60	| 1 分钟  | 
-| 300	| 5 分钟  | 
+| 60	| 1 分钟  |
+| 300	| 5 分钟  |
 | 900	| 15 分钟 |
 | 1800	| 30 分钟 |
 | 3600	| 1 小时  |
-| 7200	| 2 小时  | 
+| 7200	| 2 小时  |
 | 14400	| 4 小时  |
 | 21600	| 6 小时  |
 | 28800	| 8 小时  |
@@ -78,8 +78,24 @@ details = response.headers[grpc-message]
   price:string;
 }
 ```
+## 3 GetMarketStatusToday
+获取24小时交易对状态<br>
+/apis/trading/v1/markets/{market}/status_today<br>
+请求参数：无<br>
+请求类型：get<br>
+返回结果：<br>
+```python
+{
+  last:string;
+  open:string;
+  close:string;
+  high:string;
+  low:string;
+  volume:string;
+}
+```
 
-## 3 GetMarketTrades
+## 4 GetMarketTrades
 获取最近成交纪录<br>
 /apis/trading/v1/markets/{market}/trades<br>
 请求参数：<br>
@@ -104,7 +120,7 @@ json_encode{
 ]
 ```
 
-## 4 GetDepth
+## 5 GetDepth
 获取交易挂单<br>
 /apis/trading/v1/markets/{market}/depth<br>
 请求参数：<br>
@@ -135,7 +151,7 @@ json_encode{
 ```
 
 
-## 5 GetMarketCandles
+## 6 GetMarketCandles
 获取交易k线图<br>
 /apis/trading/v1/markets/{market}/candles<br>
 请求参数：<br>

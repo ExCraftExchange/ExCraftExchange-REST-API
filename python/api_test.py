@@ -10,7 +10,7 @@ api = ExCraftApi();
 result = api.get_market()
 print(result)
 
-# get ticker
+# get last last price
 result = api.get_last_price("ETHBTC")
 print(result)
 
