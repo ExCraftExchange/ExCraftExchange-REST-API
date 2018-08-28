@@ -80,11 +80,11 @@ Return result:<br>
 ```
 
 ## 3 GetMarketStatusToday
-获取24小时交易对状态<br>
+Taking 24 hours trading status<br>
 /apis/trading/v1/markets/{market}/status_today<br>
-请求参数：无<br>
-请求类型：get<br>
-返回结果：<br>
+Request parameters：no<br>
+Request type：get<br>
+Return result：<br>
 ```python
 {
   last:string;
