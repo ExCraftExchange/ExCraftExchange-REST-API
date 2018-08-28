@@ -78,6 +78,22 @@ details = response.headers[grpc-message]
   price:string;
 }
 ```
+## 3 GetMarketStatusToday
+24 시간 경과 상태<br>
+/apis/trading/v1/markets/{market}/status_today<br>
+요청 매개 변수 ：없음 <br>
+요청 유형 ：get<br>
+결과를 반환 ：<br>
+```python
+{
+  last:string;
+  open:string;
+  close:string;
+  high:string;
+  low:string;
+  volume:string;
+}
+```
 
 ## 3 GetMarketTrades
 최근 거래 기록 가져 오기 <br>
