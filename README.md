@@ -35,7 +35,7 @@ details = response.headers[grpc-message]
 | Value	| Meaning |
 | :-----: | :-------: |
 | 60	| 1 min   |
-| 300	| 5 min   | 
+| 300	| 5 min   |
 | 900	| 15 min  |
 | 1800	| 30 min  |
 | 3600	| 1 hour  |
@@ -178,4 +178,175 @@ Return result:<br>
     market:string;
   }
 ]
+```
+
+# Private API
+## 1 QueryBalance
+Query user balance<br>
+/apis/trading/v1/balances<br>
+Request parameters: <br>
+```python
+assets:string;             // None get all coins;
+```
+Request type: get<br>
+Return result:<br>
+```python
+[
+  {
+    assets:{                 //assets name
+      available:string;     // Available balance in string
+      holds:string;         // Frozen balance in string
+    }
+  }
+]
+```
+
+## 2 PutLimitOrder
+Put a limit order<br>
+/apis/trading/v1/markets/{market}/limit_order<br>
+Request parameters: <br>
+```python
+json_encode{
+  market:string;  // Market
+  side:int32;     // Order Side, see constants
+  amount:string;  // Amount in string
+  price:string;  // Price in string
+}
+```
+Request type: post<br>
+Return result:<br>
+```python
+{
+  order:{
+   id:int32;          // Order id
+   created_at:float;  // Timestamp in seconds
+   updated_at:float;  // Timestamp in seconds
+   market:string;     
+   type:int32;        // Order type, see constants
+   side:int32;        // Orde side, see constants
+   amount:string;     // Amount in string
+   price:string;      // Price in string
+   exec_base:string;  // Executed amount in base currency
+   exec_quote:string; // Exectured amount in quote currency
+   fee:string;        // Executed fee
+  }
+}
+```
+
+## 3 PutMarketOrder
+Put a market order<br>
+/apis/trading/v1/markets/{market}/market_order<br>
+Request parameters: <br>
+```python
+json_encode{
+  market:string;  // Market
+  side:int32;     // Order Side, see constants
+  amount:string;  // Amount in string
+}
+```
+Request type: post<br>
+Return result:<br>
+```python
+{
+  order:{
+   id:int32;          // Order id
+   created_at:float;  // Timestamp in seconds
+   updated_at:float;  // Timestamp in seconds
+   market:string;     
+   type:int32;        // Order type, see constants
+   side:int32;        // Orde side, see constants
+   amount:string;     // Amount in string
+   price:string;      // Price in string
+   exec_base:string;  // Executed amount in base currency
+   exec_quote:string; // Exectured amount in quote currency
+   fee:string;        // Executed fee
+  }
+}
+```
+
+## 4 CancelOrder
+Cancel Order<br>
+/apis/trading/v1/markets/{market}/orders/{order_id}/cancel<br>
+Request parameters: <br>
+```python
+json_encode{
+  market:string;    // Market
+  order_id:int32;   // Order id
+}
+```
+Request type: post<br>
+Return result:<br>
+```python
+{
+}
+```
+
+## 5 QueryPendingOrders
+Query pending orders<br>
+/apis/trading/v1/markets/{market}/pending_orders<br>
+Request parameters: <br>
+```python
+json_encode{
+  market:string;  // Market
+  side:int32;     // Order Side, see constants
+  offset:int32;   // Offset of results
+  limit:int32;    // Limit of results
+}
+```
+Request type: post<br>
+Return result:<br>
+```python
+{
+  total:int32,        //Total of results
+  limit:int32,        //Limit of results
+  offset:int32,       //Offset of results
+  order:[{
+   id:int32;          // Order id
+   created_at:float;  // Timestamp in seconds
+   updated_at:float;  // Timestamp in seconds
+   market:string;     
+   type:int32;        // Order type, see constants
+   side:int32;        // Orde side, see constants
+   amount:string;     // Amount in string
+   price:string;      // Price in string
+   exec_base:string;  // Executed amount in base currency
+   exec_quote:string; // Exectured amount in quote currency
+   fee:string;        // Executed fee
+  }]
+}
+```
+
+## 6 QueryFinishOrders
+Query finish orders<br>
+/apis/trading/v1/markets/{market}/finished_orders<br>
+Request parameters: <br>
+```python
+json_encode{
+  market:string;  // Market
+  side:int32;     // Order Side, see constants
+  offset:int32;   // Offset of results
+  limit:int32;    // Limit of results
+}
+```
+Request type: post<br>
+Return result:<br>
+```python
+{
+  total:int32,        //Total of results
+  limit:int32,        //Limit of results
+  offset:int32,       //Offset of results
+  order:[{
+   id:int32;          // Order id
+   created_at:float;  // Timestamp in seconds
+   updated_at:float;  // Timestamp in seconds
+   market:string;     
+   type:int32;        // Order type, see constants
+   side:int32;        // Orde side, see constants
+   amount:string;     // Amount in string
+   price:string;      // Price in string
+   exec_base:string;  // Executed amount in base currency
+   exec_quote:string; // Exectured amount in quote currency
+   fee:string;        // Executed fee
+  }]
+}
 ```

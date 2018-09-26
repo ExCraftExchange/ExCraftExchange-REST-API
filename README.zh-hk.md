@@ -179,3 +179,174 @@ json_encode{
   }
 ]
 ```
+
+# Private API
+## 1 QueryBalance
+查詢用戶餘額<br>
+/apis/trading/v1/balances<br>
+請求參數: <br>
+```python
+assets:string;             // 空獲取所有幣種餘額;
+```
+請求類型: get<br>
+返回結果:<br>
+```python
+[
+  {
+    assets:{                 //幣種名稱
+      available:string;     // 餘額
+      holds:string;         // 凍結數量
+    }
+  }
+]
+```
+
+## 2 PutLimitOrder
+限價訂單<br>
+/apis/trading/v1/markets/{market}/limit_order<br>
+請求參數: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 訂單方向
+  amount:string;  // 訂單總量
+  price:string;   // 訂單價格
+}
+```
+請求類型: post<br>
+返回結果:<br>
+```python
+{
+  order:{
+   id:int32;          // 訂單ID
+   created_at:float;  // 時間戳，秒
+   updated_at:float;  // 時間戳，秒
+   market:string;     
+   type:int32;        // 訂單類型
+   side:int32;        // 訂單方向
+   amount:string;     // 訂單總量
+   price:string;      // 訂單價格
+   exec_base:string;  // 執行base的數量
+   exec_quote:string; // 執行quote的數量
+   fee:string;        // 手續費
+  }
+}
+```
+
+## 3 PutMarketOrder
+市價訂單<br>
+/apis/trading/v1/markets/{market}/market_order<br>
+請求參數: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 訂單方向
+  amount:string;  // 訂單總量
+}
+```
+請求類型: post<br>
+返回結果:<br>
+```python
+{
+  order:{
+   id:int32;          // 訂單ID
+   created_at:float;  // 時間戳，秒
+   updated_at:float;  // 時間戳，秒
+   market:string;     
+   type:int32;        // 訂單類型
+   side:int32;        // 訂單方向
+   amount:string;     // 訂單總量
+   price:string;      // 訂單價格
+   exec_base:string;  // 執行base的數量
+   exec_quote:string; // 執行quote的數量
+   fee:string;        // 手續費
+  }
+}
+```
+
+## 4 CancelOrder
+Cancel Order<br>
+/apis/trading/v1/markets/{market}/orders/{order_id}/cancel<br>
+請求參數: <br>
+```python
+json_encode{
+  market:string;
+  order_id:int32;   // 訂單ID
+}
+```
+請求類型: post<br>
+返回結果:<br>
+```python
+{
+}
+```
+
+## 5 QueryPendingOrders
+查詢未完成訂單<br>
+/apis/trading/v1/markets/{market}/pending_orders<br>
+請求參數: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 訂單方向
+  offset:int32;
+  limit:int32;  
+}
+```
+請求類型: post<br>
+返回結果:<br>
+```python
+{
+  total:int32,        //結果總數
+  limit:int32,
+  offset:int32,
+  order:[{
+   id:int32;          // 訂單ID
+   created_at:float;  // 時間戳，秒
+   updated_at:float;  // 時間戳，秒
+   market:string;     
+   type:int32;        // 訂單類型
+   side:int32;        // 訂單方向
+   amount:string;     // 訂單總量
+   price:string;      // 訂單價格
+   exec_base:string;  // 執行base的數量
+   exec_quote:string; // 執行quote的數量
+   fee:string;        // 手續費
+  }]
+}
+```
+
+## 6 QueryFinishOrders
+查詢已完成訂單<br>
+/apis/trading/v1/markets/{market}/finished_orders<br>
+請求參數: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 訂單方向
+  offset:int32;
+  limit:int32;
+}
+```
+請求類型: post<br>
+返回結果:<br>
+```python
+{
+  total:int32,        //結果總數
+  limit:int32,      
+  offset:int32,
+  order:[{
+   id:int32;          // 訂單ID
+   created_at:float;  // 時間戳，秒
+   updated_at:float;  // 時間戳，秒
+   market:string;     
+   type:int32;        // 訂單類型
+   side:int32;        // 訂單方向
+   amount:string;     // 訂單總量
+   price:string;      // 訂單價格
+   exec_base:string;  // 執行base的數量
+   exec_quote:string; // 執行quote的數量
+   fee:string;        // 手續費
+  }]
+}
+```

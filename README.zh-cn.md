@@ -178,3 +178,174 @@ json_encode{
   }
 ]
 ```
+
+# Private API
+## 1 QueryBalance
+查询用户余额<br>
+/apis/trading/v1/balances<br>
+请求参数: <br>
+```python
+assets:string;             // 空获取所有币种余额;
+```
+请求类型: get<br>
+返回结果:<br>
+```python
+[
+  {
+    assets:{                 //币种名称
+      available:string;     // 余额
+      holds:string;         // 冻结数量
+    }
+  }
+]
+```
+
+## 2 PutLimitOrder
+限价订单<br>
+/apis/trading/v1/markets/{market}/limit_order<br>
+请求参数: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 订单方向
+  amount:string;  // 订单总量
+  price:string;   // 订单价格
+}
+```
+请求类型: post<br>
+返回结果:<br>
+```python
+{
+  order:{
+   id:int32;          // 订单ID
+   created_at:float;  // 时间戳，秒
+   updated_at:float;  // 时间戳，秒
+   market:string;     
+   type:int32;        // 订单类型
+   side:int32;        // 订单方向
+   amount:string;     // 订单总量
+   price:string;      // 订单价格
+   exec_base:string;  // 执行base的数量
+   exec_quote:string; // 执行quote的数量
+   fee:string;        // 手续费
+  }
+}
+```
+
+## 3 PutMarketOrder
+市价订单<br>
+/apis/trading/v1/markets/{market}/market_order<br>
+请求参数: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 订单方向
+  amount:string;  // 订单总量
+}
+```
+请求类型: post<br>
+返回结果:<br>
+```python
+{
+  order:{
+   id:int32;          // 订单id
+   created_at:float;  // 时间戳，秒
+   updated_at:float;  // 时间戳，秒
+   market:string;     
+   type:int32;        // 订单类型
+   side:int32;        // 订单方向
+   amount:string;     // 订单总量
+   price:string;      // 订单价格
+   exec_base:string;  // 执行base的数量
+   exec_quote:string; // 执行quote的数量
+   fee:string;        // 手续费
+  }
+}
+```
+
+## 4 CancelOrder
+取消订单<br>
+/apis/trading/v1/markets/{market}/orders/{order_id}/cancel<br>
+请求参数: <br>
+```python
+json_encode{
+  market:string;
+  order_id:int32;   // 订单ID
+}
+```
+请求类型: post<br>
+返回结果:<br>
+```python
+{
+}
+```
+
+## 5 QueryPendingOrders
+查询未完成订单<br>
+/apis/trading/v1/markets/{market}/pending_orders<br>
+请求参数: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 订单方向
+  offset:int32;
+  limit:int32;  
+}
+```
+请求类型: post<br>
+返回结果:<br>
+```python
+{
+  total:int32,        //结果总数
+  limit:int32,
+  offset:int32,
+  order:[{
+   id:int32;          // 订单ID
+   created_at:float;  // 时间戳，秒
+   updated_at:float;  // 时间戳，秒
+   market:string;     
+   type:int32;        // 订单类型
+   side:int32;        // 订单方向
+   amount:string;     // 订单总量
+   price:string;      // 订单价格
+   exec_base:string;  // 执行base的数量
+   exec_quote:string; // 执行quote的数量
+   fee:string;        // 手续费
+  }]
+}
+```
+
+## 6 QueryFinishOrders
+查询已完成订单<br>
+/apis/trading/v1/markets/{market}/finished_orders<br>
+请求参数: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 订单方向
+  offset:int32;
+  limit:int32;
+}
+```
+请求类型: post<br>
+返回结果:<br>
+```python
+{
+  total:int32,        //结果总数
+  limit:int32,      
+  offset:int32,
+  order:[{
+   id:int32;          // 订单ID
+   created_at:float;  // 时间戳，秒
+   updated_at:float;  // 时间戳，秒
+   market:string;     
+   type:int32;        // 订单类型
+   side:int32;        // 订单方向
+   amount:string;     // 订单总量
+   price:string;      // 订单价格
+   exec_base:string;  // 执行base的数量
+   exec_quote:string; // 执行quote的数量
+   fee:string;        // 手续费
+  }]
+}
+```

@@ -178,3 +178,175 @@ json_encode{
   }
 ]
 ```
+
+
+# Private API
+## 1 QueryBalance
+사용자 잔액 쿼리<br>
+/apis/trading/v1/balances<br>
+요청 매개 변수: <br>
+```python
+assets:string;             // 비워서 모든 통화 잔액을 얻으십시오;
+```
+요청 유형 : get<br>
+결과를 반환:<br>
+```python
+[
+  {
+    assets:{                 //통화 이름
+      available:string;     // 균형
+      holds:string;         // 고정 수
+    }
+  }
+]
+```
+
+## 2 PutLimitOrder
+주문 제한<br>
+/apis/trading/v1/markets/{market}/limit_order<br>
+요청 매개 변수: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 주문 방향
+  amount:string;  // 총 주문
+  price:string;   // 주문 가격
+}
+```
+요청 유형 : post<br>
+결과를 반환:<br>
+```python
+{
+  order:{
+   id:int32;          // 주문 ID
+   created_at:float;  // 타임 스탬프, 초
+   updated_at:float;  // 타임 스탬프, 초
+   market:string;     
+   type:int32;        // 주문 유형
+   side:int32;        // 주문 방향
+   amount:string;     // 총 주문
+   price:string;      // 주문 가격
+   exec_base:string;  // 실행베이스 수
+   exec_quote:string; // 실행 된 따옴표의 수
+   fee:string;        // 수수료
+  }
+}
+```
+
+## 3 PutMarketOrder
+시장 주문하다<br>
+/apis/trading/v1/markets/{market}/market_order<br>
+요청 매개 변수: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 주문 방향
+  amount:string;  // 총 주문
+}
+```
+요청 유형 : post<br>
+결과를 반환:<br>
+```python
+{
+  order:{
+   id:int32;          // 주문 ID
+   created_at:float;  // 타임 스탬프, 초
+   updated_at:float;  // 타임 스탬프, 초
+   market:string;     
+   type:int32;        // 주문 유형
+   side:int32;        // 주문 방향
+   amount:string;     // 총 주문
+   price:string;      // 주문 가격
+   exec_base:string;  // 실행베이스 수
+   exec_quote:string; // 실행 된 따옴표의 수
+   fee:string;        // 수수료
+  }
+}
+```
+
+## 4 CancelOrder
+주문을 취소하다<br>
+/apis/trading/v1/markets/{market}/orders/{order_id}/cancel<br>
+요청 매개 변수: <br>
+```python
+json_encode{
+  market:string;
+  order_id:int32;   // 주문 ID
+}
+```
+요청 유형 : post<br>
+결과를 반환:<br>
+```python
+{
+}
+```
+
+## 5 QueryPendingOrders
+대기중인 주문 주문<br>
+/apis/trading/v1/markets/{market}/pending_orders<br>
+요청 매개 변수: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 주문 방향
+  offset:int32;
+  limit:int32;  
+}
+```
+요청 유형 : post<br>
+결과를 반환:<br>
+```python
+{
+  total:int32,        //총 결과 수
+  limit:int32,
+  offset:int32,
+  order:[{
+   id:int32;          // 주문 ID
+   created_at:float;  // 타임 스탬프, 초
+   updated_at:float;  // 타임 스탬프, 초
+   market:string;     
+   type:int32;        // 주문 유형
+   side:int32;        // 주문 방향
+   amount:string;     // 총 주문
+   price:string;      // 주문 가격
+   exec_base:string;  // 실행베이스 수
+   exec_quote:string; // 실행 된 따옴표의 수
+   fee:string;        // 수수료
+  }]
+}
+```
+
+## 6 QueryFinishOrders
+주문 완료 쿼리<br>
+/apis/trading/v1/markets/{market}/finished_orders<br>
+요청 매개 변수: <br>
+```python
+json_encode{
+  market:string;
+  side:int32;     // 주문 방향
+  offset:int32;
+  limit:int32;
+}
+```
+요청 유형 : post<br>
+결과를 반환:<br>
+```python
+{
+  total:int32,        //총 결과 수
+  limit:int32,      
+  offset:int32,
+  order:[{
+   id:int32;          // 주문 ID
+   created_at:float;  // 타임 스탬프, 초
+   updated_at:float;  // 타임 스탬프, 초
+   market:string;     
+   type:int32;        // 주문 유형
+   side:int32;        // 주문 방향
+   amount:string;     // 총 주문
+   price:string;      // 주문 가격
+   exec_base:string;  // 실행베이스 수
+   exec_quote:string; // 실행 된 따옴표의 수
+   fee:string;        // 수수료
+  }]
+}
+```
